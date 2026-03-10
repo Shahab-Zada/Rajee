@@ -1,27 +1,26 @@
 name: Deploy Job concurrency
-en:
- on: push
-  branches:[main]
+
+on:
+  push:
+    branches: [main]
 
 jobs:
   build:
-   runs-on: ubunto-latest
-   concurrency:
-     group: deploy
-     cancel-in-progress: true
-    
+    runs-on: ubuntu-latest
+
+    concurrency:
+      group: deploy
+      cancel-in-progress: true
+
     steps:
-     - name: Checckout
-       uses: actions/checkout@v6.0.2
+      - name: Checkout
+        uses: actions/checkout@v4
 
-     - name: Install Dependencies
-       run: npm install
+      - name: Install Dependencies
+        run: npm install
 
-     - name: Build
-       run: npm run build
-       
-     - name: Deploy App
-       run: echo "Deploying APP"
-     
-     
-     
+      - name: Build
+        run: npm run build
+
+      - name: Deploy App
+        run: echo "Deploying APP"
